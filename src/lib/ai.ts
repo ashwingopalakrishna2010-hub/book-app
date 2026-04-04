@@ -1,6 +1,6 @@
 import type { GradeResult } from '../types';
 
-const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY || import.meta.env.GROQ_API_KEY || '';
+const GROQ_API_KEY = (import.meta.env.VITE_GROQ_API_KEY || import.meta.env.GROQ_API_KEY || '').trim();
 
 // Debug: Check if API key is loaded
 console.log('Groq API key check:', {
