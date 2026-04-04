@@ -12,106 +12,53 @@ export default function TopAppBar() {
   // Scroll state management
   const [isVisible, setIsVisible] = useState(true);
   const [opacity, setOpacity] = useState(1);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [lastScrollTime, setLastScrollTime] = useState(Date.now());
-  const [targetOpacity, setTargetOpacity] = useState(1);
-  const [scrollVelocity, setScrollVelocity] = useState(0);
 
   useEffect(() => {
-    let timeoutId: number;
-    let animationFrameId: number;
-
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const currentTime = Date.now();
-      
-      // Calculate scroll velocity (pixels per millisecond)
-      const timeDelta = currentTime - lastScrollTime;
-      const scrollDelta = Math.abs(currentScrollY - lastScrollY);
-      const velocity = timeDelta > 0 ? scrollDelta / timeDelta : 0;
-      
-      setScrollVelocity(velocity);
       
       // Always show when at the top
       if (currentScrollY === 0) {
         setIsVisible(true);
-        setTargetOpacity(1);
         setOpacity(1);
-        setLastScrollY(currentScrollY);
-        setLastScrollTime(currentTime);
         return;
       }
 
-      // Calculate target opacity based on scroll position
-      let newTargetOpacity = 1;
-      if (currentScrollY > 50 && currentScrollY > lastScrollY) {
+      // Calculate opacity directly based on scroll position
+      if (currentScrollY > 50) {
         // Scrolling down - calculate opacity based on position
         const fadeStart = 50;
         const fadeEnd = 150;
         const scrollRange = fadeEnd - fadeStart;
         const scrollProgress = Math.min((currentScrollY - fadeStart) / scrollRange, 1);
-        newTargetOpacity = 1 - scrollProgress;
+        const newOpacity = 1 - scrollProgress;
+        
+        setOpacity(newOpacity);
         
         // Completely hide after fadeEnd
         if (currentScrollY > fadeEnd) {
           setIsVisible(false);
-          newTargetOpacity = 0;
+        } else {
+          setIsVisible(true);
         }
       } 
-      // Show immediately when scrolling up
-      else if (currentScrollY < lastScrollY) {
+      // Show when above 50px
+      else {
         setIsVisible(true);
-        newTargetOpacity = 1;
+        setOpacity(1);
       }
-
-      setTargetOpacity(newTargetOpacity);
-      setLastScrollY(currentScrollY);
-      setLastScrollTime(currentTime);
     };
 
-    // Smooth animation to target opacity with velocity-based timing
-    const animateOpacity = () => {
-      setOpacity(prevOpacity => {
-        const diff = targetOpacity - prevOpacity;
-        
-        // If very close to target, snap to it
-        if (Math.abs(diff) < 0.01) {
-          return targetOpacity;
-        }
-        
-        // Calculate animation speed based on scroll velocity
-        // Higher velocity = faster animation
-        const baseSpeed = 0.08; // Base animation speed
-        const speedMultiplier = Math.max(0.5, Math.min(3, scrollVelocity * 50)); // 0.5x to 3x speed
-        const animationSpeed = baseSpeed * speedMultiplier;
-        
-        return prevOpacity + diff * animationSpeed;
-      });
-      
-      animationFrameId = requestAnimationFrame(animateOpacity);
-    };
-
-    // Start animation loop
-    animateOpacity();
-
-    // Throttled scroll handler for performance
-    const throttledHandleScroll = () => {
-      if (timeoutId) clearTimeout(timeoutId);
-      timeoutId = window.setTimeout(handleScroll, 16); // ~60fps
-    };
-
-    window.addEventListener("scroll", throttledHandleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     
     return () => {
-      window.removeEventListener("scroll", throttledHandleScroll);
-      if (timeoutId) clearTimeout(timeoutId);
-      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [lastScrollY, lastScrollTime, targetOpacity, scrollVelocity]);
+  }, []);
 
   return (
     <header 
-      className={`fixed top-0 w-full lg:hidden left-0 z-50 flex justify-between items-center px-5 py-4 transition-all duration-500 ease-in-out ${
+      className={`fixed top-0 w-full lg:hidden left-0 z-50 flex justify-between items-center px-5 py-4 transition-all duration-200 ease-out ${
         isVisible 
           ? 'translate-y-0' 
           : '-translate-y-full'
