@@ -1,6 +1,14 @@
 import type { GradeResult } from '../types';
 
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY || import.meta.env.GROQ_API_KEY;
+
+// Debug: Check if API key is loaded
+if (!GROQ_API_KEY) {
+  console.error('Groq API key not found. Please check environment variables.');
+  console.log('Available env vars:', Object.keys(import.meta.env));
+} else {
+  console.log('Groq API key loaded successfully');
+}
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const MODEL = 'llama-3.1-8b-instant'; // Free Groq model
 
@@ -8,6 +16,10 @@ const MAX_RETRIES = 2;
 const BASE_DELAY_MS = 2000; // 2 seconds
 
 async function callGroq(messages: { role: string; content: string }[]): Promise<string> {
+  if (!GROQ_API_KEY) {
+    throw new Error('Groq API key not configured');
+  }
+
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     const res = await fetch(GROQ_URL, {
       method: 'POST',
@@ -25,23 +37,25 @@ async function callGroq(messages: { role: string; content: string }[]): Promise<
 
     if (res.ok) {
       const data = await res.json();
-      return data.choices?.[0]?.message?.content?.trim() ?? '';
+      return data.choices?.[0]?.message?.content?.trim() || '';
+    } else {
+      const errorData = await res.json().catch(() => ({}));
+      console.error('Groq API error:', res.status, errorData);
+      
+      if (res.status === 401) {
+        throw new Error('Invalid Groq API key. Please check your API key configuration.');
+      }
+      
+      if (attempt === MAX_RETRIES) {
+        throw new Error(`Groq API error: ${res.status} - ${errorData.error?.message || 'Unknown error'}`);
+      }
+      
+      // Wait before retry
+      await new Promise(resolve => setTimeout(resolve, BASE_DELAY_MS * (attempt + 1)));
     }
-
-    // Rate limited — retry with exponential backoff
-    if (res.status === 429 && attempt < MAX_RETRIES) {
-      const delay = BASE_DELAY_MS * Math.pow(2, attempt); // 4s, 8s, 16s
-      console.warn(`Rate limited (429). Retrying in ${delay / 1000}s... (attempt ${attempt + 1}/${MAX_RETRIES})`);
-      await new Promise((r) => setTimeout(r, delay));
-      continue;
-    }
-
-    const errBody = await res.text();
-    console.error('OpenRouter API error:', res.status, errBody);
-    throw new Error(`OpenRouter API error: ${res.status}`);
   }
 
-  throw new Error('OpenRouter API: max retries exceeded');
+  throw new Error('Groq API: max retries exceeded');
 }
 
 // ============================================
