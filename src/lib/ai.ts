@@ -1,13 +1,19 @@
 import type { GradeResult } from '../types';
 
-const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY || import.meta.env.GROQ_API_KEY;
+const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY || import.meta.env.GROQ_API_KEY || '';
 
 // Debug: Check if API key is loaded
+console.log('Groq API key check:', {
+  hasViteKey: !!import.meta.env.VITE_GROQ_API_KEY,
+  hasServerKey: !!import.meta.env.GROQ_API_KEY,
+  keyLength: GROQ_API_KEY.length,
+  keyStart: GROQ_API_KEY.substring(0, 10) + '...'
+});
+
 if (!GROQ_API_KEY) {
-  console.error('Groq API key not found. Please check environment variables.');
-  console.log('Available env vars:', Object.keys(import.meta.env));
+  console.error('❌ Groq API key not found in any environment variable');
 } else {
-  console.log('Groq API key loaded successfully');
+  console.log('✅ Groq API key loaded successfully');
 }
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const MODEL = 'llama-3.1-8b-instant'; // Free Groq model
