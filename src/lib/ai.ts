@@ -2,7 +2,7 @@ import type { GradeResult } from '../types';
 
 const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY as string;
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
-const MODEL = 'nvidia/nemotron-3-super-120b-a12b:free';
+const MODEL = 'moonshotai/kimi-chat-v1-5';
 
 const MAX_RETRIES = 2;
 const BASE_DELAY_MS = 2000; // 2 seconds
