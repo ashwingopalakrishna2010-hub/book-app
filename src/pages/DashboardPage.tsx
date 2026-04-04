@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
 import { useApp } from "../context/AppContext";
 
 function StreakWidget({ streak }: { streak: number }) {
@@ -103,7 +102,6 @@ function QuoteWidget() {
 }
 
 export default function DashboardPage() {
-  const { user } = useAuth();
   const { books, userBooks, streak, getBookProgress } = useApp();
   const navigate = useNavigate();
 
@@ -115,26 +113,8 @@ export default function DashboardPage() {
     ? books.find((b) => b.id === currentBook.bookId)
     : null;
 
-  const displayName = user?.displayName || user?.email?.split("@")[0] || "Reader";
-  const firstName = displayName.split(" ")[0];
-
   return (
     <div className="animate-fade-in-up">
-      {/* Greeting — hidden on mobile (shown in TopAppBar) */}
-      <div className="hidden lg:block mb-8">
-        <h1 className="font-headline text-4xl font-bold text-text-primary mb-1">
-          Hi, {firstName}
-        </h1>
-        <p className="text-text-secondary text-sm">Welcome back to your reading journey.</p>
-      </div>
-
-      {/* Mobile greeting */}
-      <div className="lg:hidden mb-6">
-        <h1 className="font-headline text-3xl font-bold text-text-primary">
-          Hi, {firstName}
-        </h1>
-      </div>
-
       {/* 1. Streak Widget */}
       <StreakWidget streak={streak.currentStreak} />
 

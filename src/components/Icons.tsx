@@ -7,11 +7,6 @@ interface IconProps {
   className?: string;
 }
 
-const defaults: IconProps = {
-  size: 24,
-  color: "currentColor",
-};
-
 // Custom Fire Icon — flame shape with character
 export function IconFire({ size = 24, color = "#FF6B6B", className }: IconProps) {
   return (

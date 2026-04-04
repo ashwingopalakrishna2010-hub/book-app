@@ -58,7 +58,7 @@ async function seed() {
   console.log(`Seeded ${QUESTIONS.length} questions`);
 
   console.log("Done!");
-  process.exit(0); // Exit process when done
+  throw new Error("Seeding completed successfully");
 }
 
 seed().catch(console.error);
