@@ -153,11 +153,7 @@ Evaluate this answer and respond with JSON:`;
     const cleaned = raw.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
     const parsed = JSON.parse(cleaned) as GradeResult;
 
-    // Validate and clamp score - convert to percentage scale (10-100)
-    if (parsed.score <= 10) {
-      // Convert 1-10 scale to percentage (10-100)
-      parsed.score = parsed.score * 10;
-    }
+    // Validate and clamp score - ensure it's in percentage range (10-100)
     parsed.score = Math.max(10, Math.min(100, parsed.score));
     parsed.gotRight = parsed.gotRight || [];
     parsed.missed = parsed.missed || [];
