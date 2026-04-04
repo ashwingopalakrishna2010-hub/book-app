@@ -11,6 +11,7 @@ export default function TopAppBar() {
 
   // Scroll state management
   const [isVisible, setIsVisible] = useState(true);
+  const [opacity, setOpacity] = useState(1);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
@@ -22,17 +23,30 @@ export default function TopAppBar() {
       // Always show when at the top
       if (currentScrollY === 0) {
         setIsVisible(true);
+        setOpacity(1);
         setLastScrollY(currentScrollY);
         return;
       }
 
-      // Hide after scrolling down 50px
+      // Calculate opacity based on scroll distance (0-100px range)
       if (currentScrollY > 50 && currentScrollY > lastScrollY) {
-        setIsVisible(false);
+        // Scrolling down - gradually fade out
+        const fadeStart = 50;
+        const fadeEnd = 150;
+        const scrollRange = fadeEnd - fadeStart;
+        const scrollProgress = Math.min((currentScrollY - fadeStart) / scrollRange, 1);
+        
+        setOpacity(1 - scrollProgress);
+        
+        // Completely hide after fadeEnd
+        if (currentScrollY > fadeEnd) {
+          setIsVisible(false);
+        }
       } 
       // Show immediately when scrolling up
       else if (currentScrollY < lastScrollY) {
         setIsVisible(true);
+        setOpacity(1);
       }
 
       setLastScrollY(currentScrollY);
@@ -54,11 +68,12 @@ export default function TopAppBar() {
 
   return (
     <header 
-      className={`fixed top-0 w-full lg:hidden left-0 z-50 flex justify-between items-center px-5 py-4 transition-all duration-300 ease-out ${
+      className={`fixed top-0 w-full lg:hidden left-0 z-50 flex justify-between items-center px-5 py-4 transition-all duration-500 ease-in-out ${
         isVisible 
-          ? 'translate-y-0 opacity-100' 
-          : '-translate-y-full opacity-0'
+          ? 'translate-y-0' 
+          : '-translate-y-full'
       }`}
+      style={{ opacity: opacity }}
     >
       {/* Frosted glass background */}
       <div className="absolute inset-0 bg-bg-base/70 backdrop-blur-xl border-b border-border" />
