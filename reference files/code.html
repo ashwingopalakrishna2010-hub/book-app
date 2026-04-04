@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DeepRead - Mobile Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#f3f3f3",
+                        "on-surface-variant": "#44474d",
+                        "surface-variant": "#e2e2e2",
+                        "primary-fixed": "#d7e2ff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#a49063",
+                        "on-tertiary-fixed-variant": "#54451f",
+                        "secondary-container": "#fed488",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#f8e0ad",
+                        "on-primary-fixed-variant": "#374765",
+                        "on-secondary-fixed": "#261900",
+                        "primary-container": "#1a2b48",
+                        "on-background": "#1a1c1c",
+                        "surface": "#f9f9f9",
+                        "tertiary-fixed-dim": "#dbc493",
+                        "surface-container": "#eeeeee",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "outline-variant": "#c5c6ce",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#b6c7eb",
+                        "surface-container-highest": "#e2e2e2",
+                        "secondary": "#775a19",
+                        "on-tertiary-fixed": "#251a00",
+                        "surface-dim": "#dadada",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1a1c1c",
+                        "tertiary-container": "#362905",
+                        "on-secondary": "#ffffff",
+                        "outline": "#75777e",
+                        "tertiary": "#1e1500",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2f3131",
+                        "on-primary-container": "#8293b5",
+                        "surface-tint": "#4e5f7e",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#785a1a",
+                        "surface-container-high": "#e8e8e8",
+                        "secondary-fixed": "#ffdea5",
+                        "surface-bright": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#b6c7eb",
+                        "inverse-on-surface": "#f0f1f1",
+                        "background": "#f9f9f9",
+                        "primary": "#031632",
+                        "on-primary-fixed": "#081b38",
+                        "secondary-fixed-dim": "#e9c176"
+                    },
+                    fontFamily: {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .silk-gradient {
+            background: linear-gradient(135deg, #031632 0%, #1a2b48 100%);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-[#f9f9f9]/80 dark:bg-[#031632]/80 backdrop-blur-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#031632] dark:text-[#f9f9f9]">menu_book</span>
+<h1 class="text-2xl font-serif italic text-[#031632] dark:text-[#f9f9f9]">DeepRead</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 px-3 py-1 bg-secondary-container/30 rounded-full">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-xs font-bold text-secondary">5</span>
+</div>
+<span class="material-symbols-outlined text-[#031632] dark:text-[#f9f9f9] hover:opacity-80 transition-opacity">notifications</span>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-md mx-auto">
+<!-- Mastery Streak Widget -->
+<section class="mb-8">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_4px_32px_rgba(0,0,0,0.04)] border border-outline-variant/10">
+<div class="flex justify-between items-end mb-4">
+<div>
+<p class="text-xs font-label uppercase tracking-widest text-on-surface-variant mb-1">Weekly Momentum</p>
+<h2 class="font-headline text-2xl font-bold text-primary">Mastery Streak</h2>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-secondary text-4xl" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="text-xl font-headline font-bold text-secondary">5 Days</span>
+</div>
+</div>
+<div class="flex justify-between items-center gap-2">
+<div class="flex-1 h-1 rounded-full bg-secondary"></div>
+<div class="flex-1 h-1 rounded-full bg-secondary"></div>
+<div class="flex-1 h-1 rounded-full bg-secondary"></div>
+<div class="flex-1 h-1 rounded-full bg-secondary"></div>
+<div class="flex-1 h-1 rounded-full bg-secondary"></div>
+<div class="flex-1 h-1 rounded-full bg-surface-variant"></div>
+<div class="flex-1 h-1 rounded-full bg-surface-variant"></div>
+</div>
+</div>
+</section>
+<!-- Current Read Hero -->
+<section class="mb-10">
+<div class="relative bg-primary-container rounded-xl overflow-hidden p-6 min-h-[220px] silk-gradient">
+<div class="relative z-10 flex flex-col justify-between h-full">
+<div class="flex gap-6 items-start">
+<div class="w-24 h-36 bg-surface-variant rounded shadow-lg flex-shrink-0 transform -rotate-2 -translate-y-2 border-r-4 border-black/10 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="minimalist book cover of a philosophy text with abstract geometric shapes in deep navy and gold leaf accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBLoU4NM74Ec4-eQB5SGlnuR0ICPGtoTk4PmonV1H_SFhKrHeXF4gwyqgehAmUtQZmAdBd8HYLwaWhld-dbuWus6fJ4z58i_eJj9pumY-OwYRv2etvO4FkTJJRuqXgcLDKY4v8uZC4nc4hqPx0VLRvZF0qZtA23R6JouOMR9cwSKx_3Hkk7Z69D6VbuIA9WZSHjj8MS11e3yUGWwaFR7m1bSd0rzTvIOQHH9xCoN8ssKBGC6D3U7ERfoxxPE5rQ-dLlB5_Zd_qNm__"/>
+</div>
+<div class="flex-1">
+<p class="text-on-primary-container text-xs font-label mb-2">Currently Reading</p>
+<h3 class="font-headline text-xl text-on-primary leading-tight mb-1">Meditations</h3>
+<p class="text-on-primary-container text-sm font-label mb-4">Marcus Aurelius</p>
+<div class="mb-4">
+<div class="flex justify-between text-[10px] text-on-primary-container mb-1 uppercase tracking-tighter">
+<span>Chapter 4</span>
+<span>62% Complete</span>
+</div>
+<div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[62%]"></div>
+</div>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full py-3 bg-secondary text-on-secondary text-sm font-bold rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+                        Resume Reading
+                    </button>
+</div>
+<!-- Decorative background elements -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+</div>
+</section>
+<!-- Your Shelf (Horizontal Scroll) -->
+<section class="mb-10 -mr-6">
+<div class="flex justify-between items-center mb-4 pr-6">
+<h2 class="font-headline text-2xl text-primary">Your Shelf</h2>
+<span class="text-secondary text-xs font-bold uppercase tracking-wider">View All</span>
+</div>
+<div class="flex overflow-x-auto gap-6 hide-scrollbar pb-4 pr-6">
+<!-- Book Item 1 -->
+<div class="flex-shrink-0 w-32">
+<div class="w-32 h-48 bg-surface-container-low rounded-lg shadow-md mb-3 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="classic literature book cover with ornate gold borders and dark green background texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR3wRtpZ-QAFlD5Xt696TfI8T0qqdB2x5i0XwiDt0ECdAz8WHB9N6lwBpVvXaRkeOAvPPmtiiD_p25776FB2uunM8W6dQbSuI2o_0lpPS1AlZ4iqQJFoDQ1bjGkHegj9JxQRJKQXOv7rryTjPekrFLyu_rSB_6PTkrWXL7sqTyEOTfD7sUSYxMvaGNdaZFL-Zmx8IYURIPsyBLlvbLkdoH7J18lpabTEDoh8Hbl3F7bClGFAOj3s3A88tleWWXdGEPk5LUl8F8JqBi"/>
+</div>
+<h4 class="font-headline text-sm text-primary leading-tight line-clamp-1">The Great Gatsby</h4>
+<p class="text-[10px] text-on-surface-variant font-label">F. Scott Fitzgerald</p>
+<div class="mt-2 w-full h-[2px] bg-secondary-container/50">
+<div class="bg-secondary h-full w-1/3"></div>
+</div>
+</div>
+<!-- Book Item 2 -->
+<div class="flex-shrink-0 w-32">
+<div class="w-32 h-48 bg-surface-container-low rounded-lg shadow-md mb-3 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="modern nonfiction book cover with bold typography and a single minimalist eye illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqrB030ee_QSZGnVv8QvfWvOvRvX48WXEI34pgBkhsXOQX31AnPWs90R0WE0s5Vhy9V95xlIM6fmkwEwbOimJkR6_EeKvQ9QTpx_3MF0GTDv9J1lpFhxQL1zxORx45QAwZE9WuxyozFydjRj5HkW7yRFcH3mQq3w7oiQaqrdJCr869CXkYiyf_GIJ-tqLXVo1_ybj-8WCkn4neohTUARZ9XdyGFhxhfx9olLohFCGIbQ3vRUWHgh7pPP021pW-v7AGze352TZ9xIeo"/>
+</div>
+<h4 class="font-headline text-sm text-primary leading-tight line-clamp-1">Sapiens</h4>
+<p class="text-[10px] text-on-surface-variant font-label">Yuval Noah Harari</p>
+<div class="mt-2 w-full h-[2px] bg-secondary-container/50">
+<div class="bg-secondary h-full w-3/4"></div>
+</div>
+</div>
+<!-- Book Item 3 -->
+<div class="flex-shrink-0 w-32">
+<div class="w-32 h-48 bg-surface-container-low rounded-lg shadow-md mb-3 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="science book cover featuring a nebula nebula space background and clean sans-serif title" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUH2C_5uqzb95ejTeOY_sTNn_KsRfI6nhKMCNgc5sqY-iCC9urJ0ph4lMeCbh7NBeZl_VhzaWTw41yDZBhkGegPgEBb8BprKx6ypvH8dBpERE11DqRTHKviQE1CC3q5Hat5xP86K1k5SC5dB9GDlpyAodRiTtwBiBsH5QGeGFWCj7kD6oecNNbKnpS1sQWuBSNIYmiyVNqABee7_dYh_5oIpMdPFn9uJRL5fTNCgCLwUcLY8GLdaf1FIT9FWBuGViphtIruO93PpHD"/>
+</div>
+<h4 class="font-headline text-sm text-primary leading-tight line-clamp-1">Cosmos</h4>
+<p class="text-[10px] text-on-surface-variant font-label">Carl Sagan</p>
+<div class="mt-2 w-full h-[2px] bg-secondary-container/50">
+<div class="bg-secondary h-full w-1/5"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Daily Insight -->
+<section class="mb-10">
+<h2 class="font-headline text-2xl text-primary mb-4">Daily Insight</h2>
+<div class="bg-secondary-container/20 p-8 rounded-xl relative overflow-hidden border-l-4 border-secondary">
+<span class="material-symbols-outlined absolute -top-2 -right-2 text-secondary/10 text-8xl" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+<p class="font-headline italic text-lg text-primary leading-relaxed relative z-10 mb-6">
+                    "The soul becomes dyed with the color of its thoughts."
+                </p>
+<div class="flex items-center gap-3 relative z-10">
+<div class="w-10 h-10 rounded-full bg-primary-container overflow-hidden">
+<img class="w-full h-full object-cover grayscale" data-alt="vintage classical marble bust portrait with soft dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2V4w4sFoW7YzBKLDq89xHP3PqgMdSIAW1_uN50CPo3gYdj6pfVJd2d0XmFf3ESEfEAUsxu8gXNPhVRcM_qEtPQKZuJsT8ZzVD4LwvzjL-g-sScw9vmYhbnBpVIYSBV6F5ikti6L6Qj4OKyW7mJ6Q21q0UJqDYrqfaMzubI0bBhGL-ZugA3Imb7zf51tyhA2D8tizpP3d27XmfgffXc6LZlrvFAW0WeSxl9ScCVgv5uPkEYIqgbMnrppSoDNYu3Qf4tfL8ezj84LuW"/>
+</div>
+<div>
+<p class="text-xs font-bold text-primary">Marcus Aurelius</p>
+<p class="text-[10px] text-secondary font-medium uppercase tracking-wider">From Meditations</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#f9f9f9]/80 dark:bg-[#031632]/80 backdrop-blur-xl rounded-t-3xl shadow-[0_-4px_32px_rgba(0,0,0,0.06)] dark:shadow-none">
+<a class="flex flex-col items-center justify-center text-[#775a19] dark:text-[#775a19] font-bold scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-sans text-[11px] font-medium tracking-wide uppercase mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#031632]/40 dark:text-[#f9f9f9]/40 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined">import_contacts</span>
+<span class="font-sans text-[11px] font-medium tracking-wide uppercase mt-1">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#031632]/40 dark:text-[#f9f9f9]/40 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined">quiz</span>
+<span class="font-sans text-[11px] font-medium tracking-wide uppercase mt-1">Quizzes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#031632]/40 dark:text-[#f9f9f9]/40 hover:text-[#775a19] transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-sans text-[11px] font-medium tracking-wide uppercase mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

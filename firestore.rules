@@ -1,0 +1,32 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Catalog is readable by everyone
+    match /books/{document=**} {
+      allow read: if true;
+      allow write: if false; // Only seeded via admin/script
+    }
+    
+    // Allow collection group queries for chapters
+    match /{path=**}/chapters/{document} {
+      allow read: if true;
+    }
+
+    // Allow collection group queries for questions
+    match /{path=**}/questions/{document} {
+      allow read: if true;
+    }
+    
+    // User data is readable and writable only by the user
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      match /{document=**} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+    
+  }
+}

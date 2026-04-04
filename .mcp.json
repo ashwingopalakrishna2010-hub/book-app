@@ -1,0 +1,27 @@
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "sequential-thinking-mcp"
+    },
+    "firebase": {
+      "command": "firebase",
+      "args": [
+        "experimental:mcp"
+      ],
+      "env": {
+        "FIREBASE_PROJECT_ID": "deepread-app"
+      }
+    },
+    "vercel": {
+      "type": "http",
+      "url": "https://mcp.vercel.com"
+    },
+    "githubcopilot": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_TOKEN}"
+      }
+    }
+  }
+}

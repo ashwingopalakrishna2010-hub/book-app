@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(npm --version)",
+      "Bash(npm install:*)",
+      "Bash(sequential-thinking-mcp --version)",
+      "Bash(sequential-thinking-mcp -h)",
+      "Bash(firebase projects:list)",
+      "Bash(netstat -ano)",
+      "Bash(npx firebase-tools:*)",
+      "Bash(npx firebase:*)",
+      "Bash(echo \"Exit code: $?\")",
+      "Bash(npx firebase-tools@14.15.2 experimental:mcp)",
+      "Bash(npx @gannonh/firebase-mcp)",
+      "Bash(jq -r '.result.serverInfo.name + \"\"\"\" \"\"\"\" + .result.serverInfo.version')",
+      "Bash(npx @gannonh/firebase-mcp --version)",
+      "Bash(npx @gannonh/firebase-mcp -v)",
+      "Bash(timeout 10 npx -y @gannonh/firebase-mcp)",
+      "Bash(npx:*)",
+      "Bash(firebase-tools experimental:mcp)",
+      "Bash(npm bin:*)",
+      "Bash(where firebase:*)",
+      "Bash(find /c/Users/Ashwi/AppData/Roaming/npm -name firebase* -type f)",
+      "Bash(firebase experimental:mcp)",
+      "Bash(firebase --version)"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "firebase"
+  ]
+}
