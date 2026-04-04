@@ -101,13 +101,13 @@ export async function analyzeResponse(
   const systemPrompt = `You are a reading comprehension evaluator. Grade the student's answer and return ONLY a JSON object. Keep ALL strings short (under 15 words each).
 
 Format:
-{"score":<1-10>,"summary":"<one short sentence>","gotRight":["<short point>"],"missed":["<short point>"],"misunderstood":["<short point>"],"conceptExplanation":"<1-2 short sentences>"}
+{"score":<10-100>,"summary":"<one short sentence>","gotRight":["<short point>"],"missed":["<short point>"],"misunderstood":["<short point>"],"conceptExplanation":"<1-2 short sentences>"}
 
 Rules:
-- score: 1-10 integer
+- score: 10-100 percentage (10=poor, 50=average, 100=excellent)
 - gotRight: 1-3 items, each under 15 words
-- missed: 0-2 items (empty array if score>=9), each under 15 words
-- misunderstood: 0-1 items (empty array if score>=7), each under 15 words
+- missed: 0-2 items (empty array if score>=80), each under 15 words
+- misunderstood: 0-1 items (empty array if score>=70), each under 15 words
 - conceptExplanation: max 2 sentences, under 40 words total
 - summary: max 1 sentence, under 15 words
 - Output ONLY valid JSON. No markdown, no code fences, no extra text.`;
@@ -135,11 +135,12 @@ Evaluate this answer and respond with JSON:`;
     const cleaned = raw.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
     const parsed = JSON.parse(cleaned) as GradeResult;
 
-    // Validate and clamp score - if AI returned a percentage (>10), convert to 1-10 scale first
-    if (parsed.score > 10) {
-      parsed.score = Math.round(parsed.score / 10);
+    // Validate and clamp score - convert to percentage scale (10-100)
+    if (parsed.score <= 10) {
+      // Convert 1-10 scale to percentage (10-100)
+      parsed.score = parsed.score * 10;
     }
-    parsed.score = Math.max(1, Math.min(10, parsed.score));
+    parsed.score = Math.max(10, Math.min(100, parsed.score));
     parsed.gotRight = parsed.gotRight || [];
     parsed.missed = parsed.missed || [];
     parsed.misunderstood = parsed.misunderstood || [];

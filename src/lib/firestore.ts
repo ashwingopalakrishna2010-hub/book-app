@@ -100,7 +100,7 @@ export async function markChapterRead(
 ): Promise<void> {
   // Mark the chapter
   const hasScore = aiScore !== undefined;
-  const scorePct = hasScore ? aiScore * 10 : null;
+  const scorePct = hasScore ? aiScore : null;
   
   await setDoc(doc(db, 'users', userId, 'userBooks', bookId, 'userChapters', chapterId), {
     bookId,
@@ -223,7 +223,7 @@ export async function updateStreak(userId: string): Promise<StreakData> {
 // This function is kept for backward compatibility.
 // ============================================
 export async function gradeAnswer(_questionId: string, _answer: string, aiScore?: number): Promise<GradeResult> {
-  const score = aiScore ?? 5;
+  const score = aiScore ?? 50; // Default to 50% instead of 5
   return {
     score,
     summary: 'Answer graded by AI.',
