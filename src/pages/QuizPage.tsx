@@ -6,15 +6,15 @@ import { CHAPTER_SUMMARIES } from "../data/chapterSummaries";
 import type { GradeResult } from "../types";
 
 export default function QuizPage() {
-  const { bookId, chapterId } = useParams<{
+  const { bookId, chapterNumber } = useParams<{
     bookId: string;
-    chapterId: string;
+    chapterNumber: string;
   }>();
   const navigate = useNavigate();
   const { books, getBookChapters, markChapterRead } = useApp();
 
   const book = books.find((b) => b.id === bookId);
-  const chapterNum = parseInt(chapterId || "1", 10);
+  const chapterNum = parseInt(chapterNumber || "1", 10);
   const chapter = getBookChapters(bookId || "").find(
     (c) => c.number === chapterNum
   );
