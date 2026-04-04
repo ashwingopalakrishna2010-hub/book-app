@@ -1,21 +1,19 @@
 import type { GradeResult } from '../types';
 
-const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY as string;
-const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
-const MODEL = 'nvidia/nemotron-3-super-120b-a12b:free';
+const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY as string;
+const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
+const MODEL = 'llama-3.1-8b-instant'; // Free Groq model
 
 const MAX_RETRIES = 2;
 const BASE_DELAY_MS = 2000; // 2 seconds
 
-async function callOpenRouter(messages: { role: string; content: string }[]): Promise<string> {
+async function callGroq(messages: { role: string; content: string }[]): Promise<string> {
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
-    const res = await fetch(OPENROUTER_URL, {
+    const res = await fetch(GROQ_URL, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        'Authorization': `Bearer ${GROQ_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': window.location.origin,
-        'X-Title': 'DeepRead',
       },
       body: JSON.stringify({
         model: MODEL,
@@ -75,7 +73,7 @@ ${chapterContent}
 Generate a short, simple question (under 25 words) about this chapter:`;
 
   try {
-    const question = await callOpenRouter([
+    const question = await callGroq([
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt },
     ]);
@@ -126,7 +124,7 @@ Student's answer: "${userAnswer}"
 Evaluate this answer and respond with JSON:`;
 
   try {
-    const raw = await callOpenRouter([
+    const raw = await callGroq([
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt },
     ]);
