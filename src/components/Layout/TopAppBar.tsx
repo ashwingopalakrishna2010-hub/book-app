@@ -1,5 +1,6 @@
 import { useAuth } from "../../context/AuthContext";
 import { useApp } from "../../context/AppContext";
+import { useState, useEffect } from "react";
 
 export default function TopAppBar() {
   const { user } = useAuth();
@@ -8,8 +9,57 @@ export default function TopAppBar() {
   const displayName = user?.displayName || user?.email?.split("@")[0] || "Reader";
   const initials = displayName.slice(0, 2).toUpperCase();
 
+  // Scroll state management
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    let timeoutId: number;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Always show when at the top
+      if (currentScrollY === 0) {
+        setIsVisible(true);
+        setLastScrollY(currentScrollY);
+        return;
+      }
+
+      // Hide after scrolling down 50px
+      if (currentScrollY > 50 && currentScrollY > lastScrollY) {
+        setIsVisible(false);
+      } 
+      // Show immediately when scrolling up
+      else if (currentScrollY < lastScrollY) {
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    // Throttled scroll handler for performance
+    const throttledHandleScroll = () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = window.setTimeout(handleScroll, 16); // ~60fps
+    };
+
+    window.addEventListener("scroll", throttledHandleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener("scroll", throttledHandleScroll);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [lastScrollY]);
+
   return (
-    <header className="fixed top-0 w-full lg:hidden left-0 z-50 flex justify-between items-center px-5 py-4">
+    <header 
+      className={`fixed top-0 w-full lg:hidden left-0 z-50 flex justify-between items-center px-5 py-4 transition-all duration-300 ease-out ${
+        isVisible 
+          ? 'translate-y-0 opacity-100' 
+          : '-translate-y-full opacity-0'
+      }`}
+    >
       {/* Frosted glass background */}
       <div className="absolute inset-0 bg-bg-base/70 backdrop-blur-xl border-b border-border" />
 
