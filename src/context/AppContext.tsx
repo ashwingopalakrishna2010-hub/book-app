@@ -276,7 +276,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
       if (userChapter) {
         // Update chapter score in Firestore
         const newScore = Math.round(
-          ((userChapter.retentionScore || 0) + score * 10) / 2,
+          ((userChapter.retentionScore || 0) + score) / 2,
         );
         await db.updateChapterScore(
           user.uid,
