@@ -71,7 +71,7 @@ export default function QuizPage() {
       );
 
       // Convert 1-10 score to percentage
-      const pctScore = gradeResult.score * 10;
+      const pctScore = gradeResult.score;
       await markChapterRead(book.id, chapter.id, chapter.number, pctScore);
       setResult(gradeResult);
     } catch (error) {
@@ -91,7 +91,7 @@ export default function QuizPage() {
   };
 
   const getScoreColor = (score: number) => {
-    const pct = score * 10;
+    const pct = score;
     if (pct >= 80) return "text-success bg-success/10 border-success/30";
     if (pct >= 50) return "text-warning bg-warning/10 border-warning/30";
     return "text-error bg-error/10 border-error/30";
@@ -223,7 +223,7 @@ export default function QuizPage() {
                     Retention Score
                   </p>
                   <p className="font-headline text-5xl font-bold">
-                    {result.score * 10}%
+                    {result.score}%
                   </p>
                   <p className="text-xs font-bold mt-1 opacity-70">
                     {getScoreLabel(result.score)}

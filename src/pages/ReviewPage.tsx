@@ -81,7 +81,7 @@ export default function ReviewPage() {
         currentAnswer
       );
 
-      const pctScore = gradeResult.score * 10;
+      const pctScore = gradeResult.score;
       await saveQuizResult(currentItem.book.id, currentItem.chapter.id, pctScore);
       setSessionScores((prev) => [...prev, pctScore]);
       setReviewResult(gradeResult);
@@ -133,7 +133,7 @@ export default function ReviewPage() {
   };
 
   const getScoreColorBg = (score: number) => {
-    const pct = score * 10;
+    const pct = score;
     if (pct >= 80) return "text-success bg-success/10 border-success/30";
     if (pct >= 50) return "text-warning bg-warning/10 border-warning/30";
     return "text-error bg-error/10 border-error/30";
@@ -375,7 +375,7 @@ export default function ReviewPage() {
                   <div className="flex justify-center mb-8">
                     <div className={`p-5 rounded-2xl border text-center ${getScoreColorBg(reviewResult.score)}`}>
                       <p className="text-[11px] font-bold uppercase tracking-widest opacity-80 mb-1">Score</p>
-                      <p className="font-headline text-4xl font-bold">{reviewResult.score * 10}%</p>
+                      <p className="font-headline text-4xl font-bold">{reviewResult.score}%</p>
                     </div>
                   </div>
 
