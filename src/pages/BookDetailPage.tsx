@@ -86,40 +86,40 @@ export default function BookDetailPage() {
           </div>
 
           <div className="flex-1 text-center md:text-left pt-2">
-            <span className="inline-block px-3 py-1 bg-accent-purple/15 text-accent-purple text-[10px] font-bold uppercase tracking-widest rounded-full mb-4 border border-accent-purple/20">
+            <span className="inline-block px-3 py-1 bg-accent-purple/15 text-accent-purple text-[10px] font-bold uppercase tracking-[0.15em] rounded-full mb-4">
               {book.genre}
             </span>
-            <h1 className="font-headline text-3xl md:text-4xl text-text-primary leading-tight mb-2">{book.title}</h1>
-            <p className="text-text-secondary text-base font-serif italic mb-6">by {book.author}</p>
+            <h1 className="font-headline text-3xl md:text-4xl text-white leading-tight mb-2">{book.title}</h1>
+            <p className="text-white/50 text-base font-headline italic mb-6">by {book.author}</p>
 
             {userBook ? (
               <>
                 {/* Stats Row */}
                 <div className="flex justify-center md:justify-start gap-6 mb-5">
                   <div className="text-center md:text-left">
-                    <p className="text-2xl font-headline text-text-primary">{progress}%</p>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-text-muted">Progress</p>
+                    <p className="text-2xl font-headline text-white">{progress}%</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/40">Progress</p>
                   </div>
-                  <div className="w-px h-10 bg-border self-center" />
+                  <div className="w-px h-10 bg-white/10 self-center" />
                   <div className="text-center md:text-left">
-                    <p className={`text-2xl font-headline ${getScoreColor(retention)}`}>{retention ?? "-"}{retention !== null ? "%" : ""}</p>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-text-muted">Retention</p>
+                    <p className={`text-2xl font-headline ${retention !== null && retention >= 80 ? 'text-success' : retention !== null && retention >= 50 ? 'text-warning' : retention !== null ? 'text-error' : 'text-white/40'}`}>{retention ?? "-"}{retention !== null ? "%" : ""}</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/40">Retention</p>
                   </div>
-                  <div className="w-px h-10 bg-border self-center" />
+                  <div className="w-px h-10 bg-white/10 self-center" />
                   <div className="text-center md:text-left">
-                    <p className="text-2xl font-headline text-text-primary">{userBook.chaptersCompleted}<span className="text-base text-text-muted">/{book.totalChapters}</span></p>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-text-muted">Chapters</p>
+                    <p className="text-2xl font-headline text-white">{userBook.chaptersCompleted}<span className="text-base text-white/40">/{book.totalChapters}</span></p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/40">Chapters</p>
                   </div>
                 </div>
 
                 {/* Progress bar */}
-                <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                  <div className="h-full bg-accent-lime rounded-full transition-all duration-1000 ease-out" style={{ width: `${progress}%` }} />
+                <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-full bg-accent-purple rounded-full transition-all duration-1000 ease-out" style={{ width: `${progress}%` }} />
                 </div>
               </>
             ) : (
               <button
-                className="px-8 py-4 bg-accent-lime text-text-inverse rounded-xl font-bold hover:scale-[1.02] shadow-[0_4px_24px_rgba(200,245,71,0.25)] transition-all flex items-center justify-center gap-2 mx-auto md:mx-0 w-full md:w-auto active:scale-[0.98]"
+                className="px-8 py-4 bg-white text-bg-navy rounded-xl font-bold hover:scale-[1.02] shadow-[0_4px_24px_rgba(0,0,0,0.15)] transition-all flex items-center justify-center gap-2 mx-auto md:mx-0 w-full md:w-auto active:scale-[0.98]"
                 onClick={() => addBookToShelf(book.id)}
               >
                 <span className="material-symbols-outlined text-sm">add</span>
@@ -134,9 +134,9 @@ export default function BookDetailPage() {
       </div>
 
       {/* About */}
-      <div className="mb-10">
+      <div className="mb-12">
         <h2 className="font-headline text-xl text-text-primary mb-4">About the Book</h2>
-        <p className="text-text-secondary text-base leading-relaxed font-serif">{book.description}</p>
+        <p className="text-text-secondary text-base leading-relaxed font-headline italic">{book.description}</p>
       </div>
 
       {/* Table of Contents */}
@@ -153,16 +153,16 @@ export default function BookDetailPage() {
                 key={chapter.id}
                 className={`p-4 md:p-5 rounded-xl flex items-center gap-4 transition-all duration-200 ${
                   isRead
-                    ? "glass border-accent-lime/10"
-                    : "bg-bg-card hover:bg-bg-card-hover border border-border"
+                    ? "bg-white shadow-atmospheric"
+                    : "bg-bg-card hover:bg-bg-card-hover"
                 }`}
               >
                 {/* Number badge */}
                 <div
                   className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 font-headline font-bold text-sm ${
                     isRead
-                      ? "bg-accent-lime/15 text-accent-lime"
-                      : "bg-bg-glass-strong text-text-muted"
+                      ? "bg-bg-navy/[0.08] text-bg-navy"
+                      : "bg-bg-base text-text-muted"
                   }`}
                 >
                   {isRead ? (
@@ -191,12 +191,12 @@ export default function BookDetailPage() {
                   {isRead ? (
                     <div className="flex flex-col items-end gap-1">
                       {retentionScore !== null && (
-                        <span className={`text-sm font-headline font-bold px-2 py-0.5 rounded-lg bg-bg-glass ${getScoreColor(retentionScore)}`}>
+                        <span className={`text-sm font-headline font-bold px-2 py-0.5 rounded-lg bg-bg-base ${getScoreColor(retentionScore)}`}>
                           {retentionScore}%
                         </span>
                       )}
                       <button
-                        className="flex items-center gap-0.5 text-[10px] uppercase font-bold text-text-muted hover:text-accent-lime transition-colors"
+                        className="flex items-center gap-0.5 text-[10px] uppercase font-bold text-text-muted hover:text-bg-navy transition-colors"
                         onClick={() => navigate(`/quiz/${book.id}/${chapter.number}`)}
                       >
                         Retake <span className="material-symbols-outlined text-[14px]">chevron_right</span>
@@ -204,13 +204,13 @@ export default function BookDetailPage() {
                     </div>
                   ) : userBook ? (
                     <button
-                      className="px-4 py-2 glass rounded-xl text-xs uppercase font-bold tracking-wider text-text-secondary hover:bg-accent-lime hover:text-text-inverse transition-all"
+                      className="px-4 py-2 bg-bg-base rounded-xl text-xs uppercase font-bold tracking-[0.1em] text-text-secondary hover:bg-bg-navy hover:text-text-inverse transition-all"
                       onClick={() => handleMarkRead(chapter.number)}
                     >
                       Mark Read
                     </button>
                   ) : (
-                    <div className="w-9 h-9 flex items-center justify-center rounded-xl bg-bg-glass">
+                    <div className="w-9 h-9 flex items-center justify-center rounded-xl bg-bg-base">
                       <span className="material-symbols-outlined text-text-muted text-sm">lock</span>
                     </div>
                   )}

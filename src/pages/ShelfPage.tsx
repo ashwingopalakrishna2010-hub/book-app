@@ -55,15 +55,15 @@ export default function ShelfPage() {
           return (
             <div
               key={book.id}
-              className="glass rounded-2xl p-5 flex flex-col cursor-pointer transition-all duration-300 hover:bg-bg-card-hover group"
+              className="bg-white rounded-2xl p-5 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-[0_4px_16px_rgba(3,22,50,0.08),0_12px_48px_rgba(3,22,50,0.06)] group shadow-atmospheric"
               onClick={() => navigate(`/book/${book.id}`)}
             >
               <div className="flex gap-4">
-                <div className="w-20 h-28 flex-shrink-0 rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)] border border-border group-hover:border-accent-lime/30 transition-all">
+                <div className="w-20 h-28 flex-shrink-0 rounded-xl overflow-hidden shadow-[0_4px_16px_rgba(3,22,50,0.12)] group-hover:shadow-[0_8px_24px_rgba(3,22,50,0.15)] transition-all">
                   {book.coverUrl ? (
                     <img className="w-full h-full object-cover" alt={book.title} src={book.coverUrl} />
                   ) : (
-                    <div className="w-full h-full bg-bg-glass flex items-center justify-center">
+                    <div className="w-full h-full bg-bg-base flex items-center justify-center">
                       <span className="material-symbols-outlined text-text-muted">menu_book</span>
                     </div>
                   )}
@@ -71,15 +71,15 @@ export default function ShelfPage() {
 
                 <div className="flex-1 min-w-0 flex flex-col justify-between py-1">
                   <div>
-                    <h3 className="font-headline text-base text-text-primary leading-tight line-clamp-2 mb-1 group-hover:text-accent-lime transition-colors">
+                    <h3 className="font-headline text-base text-text-primary leading-tight line-clamp-2 mb-1 group-hover:text-bg-navy transition-colors">
                       {book.title}
                     </h3>
                     <p className="text-text-muted text-xs mb-2 line-clamp-1">by {book.author}</p>
 
                     <span
-                      className={`inline-block px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-widest ${
+                      className={`inline-block px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-[0.1em] ${
                         ub.status === "reading"
-                          ? "bg-accent-lime/10 text-accent-lime"
+                          ? "bg-bg-navy/[0.06] text-bg-navy"
                           : "bg-accent-purple/10 text-accent-purple"
                       }`}
                     >
@@ -99,9 +99,9 @@ export default function ShelfPage() {
                       )}
                     </div>
                     {ub.status === "reading" && (
-                      <div className="w-full h-1.5 bg-bg-glass-strong rounded-full overflow-hidden">
+                      <div className="w-full h-1.5 bg-bg-base rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-accent-lime rounded-full transition-all duration-500"
+                          className="h-full bg-bg-navy rounded-full transition-all duration-500"
                           style={{ width: `${progress}%` }}
                         />
                       </div>
@@ -115,7 +115,7 @@ export default function ShelfPage() {
       </div>
 
       {displayedBooks.length === 0 && (
-        <div className="text-center py-20 glass rounded-2xl mt-6">
+        <div className="text-center py-20 bg-white rounded-2xl mt-6 shadow-atmospheric">
           <span className="material-symbols-outlined text-text-muted text-5xl mb-4">book</span>
           <h3 className="font-headline text-2xl text-text-primary mb-2">
             {activeTab === "reading" ? "No books in progress" : "No completed books"}
@@ -127,7 +127,7 @@ export default function ShelfPage() {
           </p>
           {activeTab === "reading" && (
             <button
-              className="mt-6 px-6 py-2.5 bg-accent-lime text-text-inverse rounded-xl text-sm font-bold shadow-[0_4px_16px_rgba(200,245,71,0.2)] hover:scale-[1.02] transition-transform"
+              className="mt-6 px-6 py-2.5 btn-silk rounded-xl text-sm hover:scale-[1.02] transition-transform"
               onClick={() => navigate("/discover")}
             >
               Browse Library

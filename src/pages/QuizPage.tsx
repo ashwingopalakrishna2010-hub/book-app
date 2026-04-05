@@ -110,7 +110,7 @@ export default function QuizPage() {
       {/* Top Bar Navigation */}
       <div className="flex justify-between items-center mt-6 mb-12">
         <button
-          className="flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors text-sm font-bold bg-bg-glass-strong px-4 py-2 rounded-full border border-border"
+          className="flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors text-sm font-bold bg-white px-4 py-2 rounded-full shadow-atmospheric"
           onClick={() => navigate(-1)}
         >
           <span className="material-symbols-outlined text-[18px]">close</span>
@@ -138,8 +138,8 @@ export default function QuizPage() {
                 >
                   auto_awesome
                 </span>
-                <p className="font-headline text-xl text-text-primary mb-2">Generating your question...</p>
-                <p className="text-sm text-text-muted">AI is crafting a thought-provoking question about this chapter</p>
+                <p className="font-headline text-xl text-text-primary mb-2">Crafting your question...</p>
+                <p className="text-sm text-text-muted">AI is generating a thought-provoking question about this chapter</p>
               </div>
             ) : (
               <>
@@ -150,7 +150,7 @@ export default function QuizPage() {
                   >
                     auto_awesome
                   </span>
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-accent-purple">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-accent-purple">
                     AI-Generated Question
                   </span>
                 </div>
@@ -162,7 +162,7 @@ export default function QuizPage() {
                 <div className="relative max-w-2xl mx-auto">
                   <textarea
                     autoFocus
-                    className="w-full bg-transparent border-b-2 border-border/50 p-4 min-h-[120px] text-text-primary placeholder-text-muted/40 focus:outline-none focus:border-accent-lime transition-colors resize-none text-xl md:text-2xl font-serif text-center"
+                    className="w-full bg-transparent border-b-2 border-border-strong/30 p-4 min-h-[120px] text-text-primary placeholder-text-muted/40 focus:outline-none focus:border-bg-navy/40 transition-colors resize-none text-xl md:text-2xl font-headline italic text-center"
                     placeholder="Share your understanding here..."
                     value={currentAnswer}
                     onChange={(e) => setCurrentAnswer(e.target.value)}
@@ -179,8 +179,8 @@ export default function QuizPage() {
                 onClick={handleSubmit}
                 className={`px-10 py-4 rounded-full font-bold flex items-center justify-center gap-3 transition-all duration-300 text-[15px] tracking-wide ${
                   !currentAnswer.trim() || isSubmitting
-                    ? "bg-bg-glass-strong text-text-muted border border-border cursor-not-allowed"
-                    : "bg-accent-lime text-bg-page hover:scale-[1.02] shadow-[0_8px_24px_rgba(200,245,71,0.25)] active:scale-[0.98]"
+                    ? "bg-bg-base text-text-muted cursor-not-allowed"
+                    : "btn-silk hover:scale-[1.02] active:scale-[0.98]"
                 }`}
               >
                 {isSubmitting ? (
@@ -201,11 +201,11 @@ export default function QuizPage() {
       ) : (
         /* Result Screen */
         <div className="animate-fade-in-up">
-          <div className="relative rounded-2xl overflow-hidden glass p-8 md:p-12 text-center mb-6">
-             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-accent-purple/5 to-accent-lime/5" />
+          <div className="relative rounded-2xl overflow-hidden bg-white p-8 md:p-12 text-center mb-6 shadow-atmospheric">
+             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-accent-purple/5 to-transparent" />
             <div className="relative z-10">
                <span
-                className="material-symbols-outlined text-6xl text-accent-lime mb-4 drop-shadow-[0_0_15px_rgba(200,245,71,0.4)]"
+                className="material-symbols-outlined text-6xl text-bg-navy mb-4 drop-shadow-[0_0_15px_rgba(3,22,50,0.15)]"
                 style={{ fontVariationSettings: "'FILL' 1" }}
               >
                 verified
@@ -287,10 +287,10 @@ export default function QuizPage() {
 
               {/* Concept Explanation */}
               {result.conceptExplanation && (
-                <div className="bg-bg-glass-strong rounded-xl p-5 text-left border border-border mt-4">
+                <div className="bg-bg-base rounded-xl p-5 text-left mt-4">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="material-symbols-outlined text-accent-purple text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>auto_awesome</span>
-                    <p className="text-xs font-bold uppercase tracking-widest text-accent-purple">Key Concept Explanation</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-purple">Key Concept Explanation</p>
                   </div>
                   <p className="text-sm font-serif italic text-text-primary leading-relaxed">
                     "{result.conceptExplanation}"
@@ -302,14 +302,14 @@ export default function QuizPage() {
 
           <div className="flex flex-col gap-3">
              <button
-              className="w-full py-4 bg-accent-lime text-text-inverse rounded-xl font-bold hover:scale-[1.02] shadow-[0_4px_24px_rgba(200,245,71,0.25)] transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
+              className="w-full py-4 btn-silk rounded-xl hover:scale-[1.02] transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
               onClick={() => navigate(`/book/${book.id}`)}
             >
               <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>menu_book</span>
               Return to Book
             </button>
             <button
-               className="w-full py-3 glass text-text-primary rounded-xl font-bold hover:bg-bg-glass-strong transition-colors"
+               className="w-full py-3 bg-white text-text-primary rounded-xl font-bold hover:bg-bg-card-hover transition-colors shadow-atmospheric"
                 onClick={() => navigate("/")}
             >
               Go to Dashboard

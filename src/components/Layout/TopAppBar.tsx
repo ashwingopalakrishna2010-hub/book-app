@@ -66,11 +66,11 @@ export default function TopAppBar() {
       style={{ opacity: opacity }}
     >
       {/* Frosted glass background */}
-      <div className="absolute inset-0 bg-bg-base/70 backdrop-blur-xl border-b border-border" />
+      <div className="absolute inset-0 bg-bg-base/80 backdrop-blur-xl" />
 
       {/* Avatar */}
       <div className="relative z-10 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-accent-purple/20 border-2 border-accent-purple/40 flex items-center justify-center text-accent-purple font-bold text-sm">
+        <div className="w-10 h-10 rounded-full bg-bg-navy/10 border-2 border-bg-navy/10 flex items-center justify-center text-bg-navy font-bold text-sm">
           {initials}
         </div>
         <div>
@@ -78,12 +78,12 @@ export default function TopAppBar() {
           {streak.currentStreak > 0 && (
             <div className="flex items-center gap-1">
               <span
-                className="material-symbols-outlined text-accent-lime text-xs"
+                className="material-symbols-outlined text-accent-purple text-xs"
                 style={{ fontVariationSettings: "'FILL' 1" }}
               >
                 local_fire_department
               </span>
-              <span className="text-[10px] font-bold text-accent-lime">{streak.currentStreak} day streak</span>
+              <span className="text-[10px] font-bold text-accent-purple">{streak.currentStreak} day streak</span>
             </div>
           )}
         </div>
@@ -91,10 +91,10 @@ export default function TopAppBar() {
 
       {/* Action Icons */}
       <div className="relative z-10 flex items-center gap-2">
-        <button className="w-10 h-10 rounded-full glass flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors">
+        <button className="w-10 h-10 rounded-full bg-white/60 backdrop-blur-sm flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors">
           <span className="material-symbols-outlined text-xl">search</span>
         </button>
-        <button className="w-10 h-10 rounded-full glass flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors">
+        <button className="w-10 h-10 rounded-full bg-white/60 backdrop-blur-sm flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors">
           <span className="material-symbols-outlined text-xl">notifications</span>
         </button>
       </div>

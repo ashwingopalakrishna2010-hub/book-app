@@ -36,14 +36,14 @@ export default function DiscoverPage() {
         <p className="text-text-secondary text-sm">Find your next deep read.</p>
       </div>
 
-      {/* Search Bar — glass style */}
+      {/* Search Bar */}
       <div className="mb-6 relative">
         <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-muted z-10">
           search
         </span>
         <input
           type="text"
-          className="w-full glass pl-12 pr-4 py-3.5 rounded-2xl text-text-primary placeholder-text-muted focus:outline-none focus:border-accent-lime/30 transition-colors text-sm"
+          className="w-full bg-white pl-12 pr-4 py-3.5 rounded-2xl text-text-primary placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-bg-navy/10 transition-all text-sm shadow-atmospheric"
           placeholder="Search books, authors, or topics..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -70,7 +70,7 @@ export default function DiscoverPage() {
         <h2 className="font-headline text-lg text-text-primary">
           {searchQuery ? `Results (${filteredBooks.length})` : "Popular Books"}
         </h2>
-        <span className="text-accent-lime text-[11px] font-bold uppercase tracking-wider">
+        <span className="text-text-secondary text-[11px] font-bold uppercase tracking-[0.1em]">
           See all
         </span>
       </div>
@@ -83,27 +83,25 @@ export default function DiscoverPage() {
           return (
             <div
               key={book.id}
-              className={`glass rounded-2xl p-5 flex flex-col cursor-pointer transition-all duration-300 hover:bg-bg-card-hover group ${
-                onShelf ? "border-accent-lime/20" : ""
-              }`}
+              className={`bg-white rounded-2xl p-5 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-[0_4px_16px_rgba(3,22,50,0.08),0_12px_48px_rgba(3,22,50,0.06)] group shadow-atmospheric`}
               onClick={() => (onShelf ? navigate(`/book/${book.id}`) : undefined)}
             >
               <div className="flex gap-4 mb-4">
-                <div className="w-20 h-28 flex-shrink-0 rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.3)] border border-border group-hover:border-accent-purple/30 transition-colors">
+                <div className="w-20 h-28 flex-shrink-0 rounded-xl overflow-hidden shadow-[0_4px_16px_rgba(3,22,50,0.12)] group-hover:shadow-[0_8px_24px_rgba(3,22,50,0.15)] transition-all">
                   {book.coverUrl ? (
                     <img className="w-full h-full object-cover" alt={book.title} src={book.coverUrl} />
                   ) : (
-                    <div className="w-full h-full bg-bg-glass flex items-center justify-center">
+                    <div className="w-full h-full bg-bg-base flex items-center justify-center">
                       <span className="material-symbols-outlined text-text-muted">menu_book</span>
                     </div>
                   )}
                 </div>
                 <div className="flex-1 min-w-0 py-1">
-                  <h3 className="font-headline text-base text-text-primary leading-tight mb-1.5 line-clamp-2 group-hover:text-accent-lime transition-colors">{book.title}</h3>
+                  <h3 className="font-headline text-base text-text-primary leading-tight mb-1.5 line-clamp-2 group-hover:text-bg-navy transition-colors">{book.title}</h3>
                   <p className="text-text-secondary text-xs mb-3 line-clamp-1">{book.author}</p>
-                  <div className="flex flex-wrap gap-2 text-[10px] uppercase font-bold tracking-wider">
-                    <span className="px-2 py-0.5 bg-bg-glass-strong rounded-md text-text-secondary">{book.totalChapters} Ch.</span>
-                    <span className="px-2 py-0.5 bg-accent-purple/10 text-accent-purple rounded-md border border-accent-purple/20">{book.genre}</span>
+                  <div className="flex flex-wrap gap-2 text-[10px] uppercase font-bold tracking-[0.1em]">
+                    <span className="px-2 py-0.5 bg-bg-base rounded-md text-text-secondary">{book.totalChapters} Ch.</span>
+                    <span className="px-2 py-0.5 bg-accent-purple/10 text-accent-purple rounded-md">{book.genre}</span>
                   </div>
                 </div>
               </div>
@@ -115,8 +113,8 @@ export default function DiscoverPage() {
                 <button
                   className={`w-full py-3 rounded-xl font-bold text-sm flex justify-center items-center gap-2 transition-all duration-300 ${
                     justAdded
-                      ? "bg-accent-lime text-text-inverse"
-                      : "glass text-text-primary hover:bg-bg-card-hover"
+                      ? "bg-bg-navy text-text-inverse"
+                      : "bg-bg-base text-text-primary hover:bg-bg-card-hover"
                   }`}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -130,7 +128,7 @@ export default function DiscoverPage() {
                 </button>
               ) : (
                 <button
-                  className="w-full py-3 bg-accent-lime text-text-inverse rounded-xl font-bold text-sm flex justify-center items-center gap-2 hover:scale-[1.02] shadow-[0_4px_16px_rgba(200,245,71,0.2)] transition-all active:scale-[0.98]"
+                  className="w-full py-3 btn-silk rounded-xl text-sm flex justify-center items-center gap-2 hover:scale-[1.02] transition-all active:scale-[0.98]"
                   onClick={(e) => handleAdd(e, book.id)}
                 >
                   <span className="material-symbols-outlined text-sm">add</span>
@@ -143,7 +141,7 @@ export default function DiscoverPage() {
       </div>
 
       {filteredBooks.length === 0 && (
-        <div className="text-center py-20 glass rounded-2xl mt-4">
+        <div className="text-center py-20 bg-white rounded-2xl mt-4 shadow-atmospheric">
           <span className="material-symbols-outlined text-text-muted text-5xl mb-4">search_off</span>
           <p className="text-text-primary font-headline text-xl mb-2">No books found</p>
           <p className="text-text-secondary">Try adjusting your search or filters.</p>

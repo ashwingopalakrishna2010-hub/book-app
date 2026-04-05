@@ -14,23 +14,23 @@ function StreakWidget({ streak }: { streak: number }) {
   });
 
   return (
-    <section className="mb-8">
-      <div className="glass rounded-2xl p-5">
+    <section className="mb-10">
+      <div className="bg-white rounded-2xl p-5 shadow-atmospheric">
         <div className="flex justify-between items-center mb-5">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-text-muted mb-1">
+            <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-text-muted mb-1">
               Weekly Momentum
             </p>
             <h2 className="font-headline text-xl font-bold text-text-primary">Mastery Streak</h2>
           </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent-lime/10">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent-purple/10">
             <span
-              className="material-symbols-outlined text-accent-lime text-xl"
+              className="material-symbols-outlined text-accent-purple text-xl"
               style={{ fontVariationSettings: "'FILL' 1" }}
             >
               local_fire_department
             </span>
-            <span className="text-lg font-headline font-bold text-accent-lime">
+            <span className="text-lg font-headline font-bold text-accent-purple">
               {streak}
             </span>
           </div>
@@ -41,14 +41,14 @@ function StreakWidget({ streak }: { streak: number }) {
               <div
                 className={`w-full rounded-full transition-all duration-500 ${
                   day.isActive
-                    ? "bg-accent-lime h-3"
-                    : "bg-bg-glass-strong h-1.5"
-                } ${day.isToday && day.isActive ? "shadow-[0_0_8px_rgba(200,245,71,0.4)]" : ""}`}
+                    ? "bg-bg-navy h-3"
+                    : "bg-bg-base h-1.5"
+                } ${day.isToday && day.isActive ? "shadow-[0_0_8px_rgba(3,22,50,0.15)]" : ""}`}
               />
               <span
                 className={`text-[9px] uppercase font-bold tracking-wider ${
                   day.isToday
-                    ? "text-accent-lime"
+                    ? "text-bg-navy"
                     : day.isActive
                       ? "text-text-primary"
                       : "text-text-muted"
@@ -67,13 +67,13 @@ function StreakWidget({ streak }: { streak: number }) {
 function QuoteWidget() {
   return (
     <section className="mb-10">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-5">
         <h2 className="font-headline text-xl text-text-primary">Daily Insight</h2>
       </div>
-      <div className="glass rounded-2xl p-6 relative overflow-hidden">
+      <div className="bg-white rounded-2xl p-6 relative overflow-hidden shadow-atmospheric">
         <div className="absolute top-0 left-0 w-1 h-full bg-accent-purple rounded-full" />
         <span
-          className="material-symbols-outlined absolute -top-2 -right-2 text-accent-purple/10 text-8xl"
+          className="material-symbols-outlined absolute -top-2 -right-2 text-accent-purple/8 text-8xl"
           style={{ fontVariationSettings: "'FILL' 1" }}
         >
           format_quote
@@ -82,7 +82,7 @@ function QuoteWidget() {
           "The soul becomes dyed with the color of its thoughts."
         </p>
         <div className="flex items-center gap-3 relative z-10 pl-4">
-          <div className="w-10 h-10 rounded-full bg-accent-purple/20 overflow-hidden border border-accent-purple/30">
+          <div className="w-10 h-10 rounded-full bg-accent-purple/15 overflow-hidden border border-accent-purple/20">
             <img
               className="w-full h-full object-cover"
               alt="Marcus Aurelius"
@@ -91,7 +91,7 @@ function QuoteWidget() {
           </div>
           <div>
             <p className="text-sm font-bold text-text-primary">Marcus Aurelius</p>
-            <p className="text-[10px] text-accent-purple font-semibold uppercase tracking-wider">
+            <p className="text-[10px] text-accent-purple font-semibold uppercase tracking-[0.15em]">
               From Meditations
             </p>
           </div>
@@ -119,8 +119,8 @@ export default function DashboardPage() {
       <StreakWidget streak={streak.currentStreak} />
 
       {/* 2. Current Read Hero — Featured card like reference */}
-      <section className="mb-10">
-        <div className="flex justify-between items-center mb-4">
+      <section className="mb-12">
+        <div className="flex justify-between items-center mb-5">
           <h2 className="font-headline text-xl text-text-primary">Continue Reading</h2>
         </div>
 
@@ -129,9 +129,9 @@ export default function DashboardPage() {
             className="relative rounded-2xl overflow-hidden cursor-pointer group"
             onClick={() => navigate(`/book/${currentBookData.id}`)}
           >
-            {/* Gradient background like the reference's "Discover Weekly" */}
+            {/* Navy gradient background */}
             <div className="absolute inset-0 hero-gradient" />
-            <div className="absolute inset-0 bg-gradient-to-r from-accent-purple/20 via-accent-pink/10 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-accent-purple/10 via-transparent to-transparent" />
 
             <div className="relative z-10 p-6 flex gap-5 items-center">
               {/* Book cover */}
@@ -143,59 +143,57 @@ export default function DashboardPage() {
                     src={currentBookData.coverUrl}
                   />
                 ) : (
-                  <div className="w-full h-full bg-bg-glass flex items-center justify-center">
-                    <span className="material-symbols-outlined text-text-muted text-2xl">menu_book</span>
+                  <div className="w-full h-full bg-white/5 flex items-center justify-center">
+                    <span className="material-symbols-outlined text-white/30 text-2xl">menu_book</span>
                   </div>
                 )}
               </div>
 
               {/* Info */}
               <div className="flex-1 min-w-0">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-accent-purple mb-2">
+                <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-accent-purple mb-2">
                   Currently Reading
                 </p>
-                <h3 className="font-headline text-xl text-text-primary leading-tight mb-1 line-clamp-2">
+                <h3 className="font-headline text-xl text-white leading-tight mb-1 line-clamp-2">
                   {currentBookData.title}
                 </h3>
-                <p className="text-text-secondary text-xs mb-4">
+                <p className="text-white/50 text-xs mb-4">
                   {currentBookData.author}
                 </p>
 
                 {/* Progress */}
                 <div className="mb-4">
-                  <div className="flex justify-between text-[10px] text-text-muted mb-1.5">
+                  <div className="flex justify-between text-[10px] text-white/40 mb-1.5">
                     <span>Chapter {currentBook.chaptersCompleted + 1}</span>
                     <span>{getBookProgress(currentBookData.id)}%</span>
                   </div>
                   <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
                     <div
-                      className="bg-accent-lime h-full rounded-full transition-all duration-700 ease-out"
+                      className="bg-accent-purple h-full rounded-full transition-all duration-700 ease-out"
                       style={{ width: `${getBookProgress(currentBookData.id)}%` }}
                     />
                   </div>
                 </div>
 
-                {/* Action buttons */}
+                {/* Action button */}
                 <div className="flex items-center gap-3">
-                  <button className="w-10 h-10 rounded-full bg-accent-lime flex items-center justify-center text-text-inverse shadow-[0_4px_16px_rgba(200,245,71,0.3)] hover:scale-110 transition-transform">
-                    <span className="material-symbols-outlined text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
-                  </button>
-                  <button className="w-8 h-8 rounded-full glass flex items-center justify-center text-text-secondary hover:text-accent-pink transition-colors">
-                    <span className="material-symbols-outlined text-lg">favorite</span>
+                  <button className="px-5 py-2 rounded-full bg-white text-bg-navy text-xs font-bold shadow-[0_2px_8px_rgba(0,0,0,0.15)] hover:scale-105 transition-transform flex items-center gap-2">
+                    <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
+                    Resume Reading
                   </button>
                 </div>
               </div>
             </div>
           </div>
         ) : (
-          <div className="glass rounded-2xl p-8 text-center">
+          <div className="bg-white rounded-2xl p-8 text-center shadow-atmospheric">
             <span className="material-symbols-outlined text-4xl text-text-muted mb-3">menu_book</span>
             <h3 className="font-headline text-lg text-text-primary mb-1">No book in progress</h3>
             <p className="text-sm text-text-secondary mb-5">
               Begin your deep reading journey today.
             </p>
             <button
-              className="px-6 py-2.5 bg-accent-lime text-text-inverse rounded-xl text-sm font-bold hover:scale-[1.02] transition-transform shadow-[0_4px_16px_rgba(200,245,71,0.2)]"
+              className="px-6 py-2.5 btn-silk rounded-xl text-sm hover:scale-[1.02] transition-transform"
               onClick={() => navigate("/discover")}
             >
               Discover Books
@@ -206,14 +204,14 @@ export default function DashboardPage() {
 
       {/* 3. Your Shelf (Horizontal Scroll) */}
       {shelfBooks.length > 0 && (
-        <section className="mb-10 -mr-5 lg:-mr-8">
-          <div className="flex justify-between items-center mb-4 pr-5 lg:pr-8">
+        <section className="mb-12 -mr-5 lg:-mr-8">
+          <div className="flex justify-between items-center mb-5 pr-5 lg:pr-8">
             <h2 className="font-headline text-xl text-text-primary">Your Shelf</h2>
             <button
               onClick={() => navigate("/shelf")}
-              className="text-accent-lime text-[11px] font-bold uppercase tracking-wider hover:opacity-80 transition-opacity"
+              className="text-text-secondary text-[11px] font-bold uppercase tracking-[0.1em] hover:text-text-primary transition-colors"
             >
-              See all
+              View all
             </button>
           </div>
           <div className="flex overflow-x-auto gap-4 hide-scrollbar pb-4 pr-5 lg:pr-8">
@@ -229,7 +227,7 @@ export default function DashboardPage() {
                   className="flex-shrink-0 w-28 cursor-pointer group"
                   onClick={() => navigate(`/book/${bookMatch.id}`)}
                 >
-                  <div className="w-28 h-40 rounded-xl overflow-hidden mb-3 shadow-[0_4px_20px_rgba(0,0,0,0.3)] border border-border group-hover:border-accent-lime/30 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_8px_32px_rgba(200,245,71,0.1)]">
+                  <div className="w-28 h-40 rounded-xl overflow-hidden mb-3 shadow-[0_4px_16px_rgba(3,22,50,0.1)] group-hover:shadow-[0_8px_24px_rgba(3,22,50,0.15)] transition-all duration-300 group-hover:-translate-y-1">
                     {bookMatch.coverUrl ? (
                       <img
                         className="w-full h-full object-cover"
@@ -237,7 +235,7 @@ export default function DashboardPage() {
                         src={bookMatch.coverUrl}
                       />
                     ) : (
-                      <div className="w-full h-full bg-bg-glass flex items-center justify-center">
+                      <div className="w-full h-full bg-bg-card flex items-center justify-center">
                         <span className="material-symbols-outlined text-text-muted">menu_book</span>
                       </div>
                     )}
@@ -248,9 +246,9 @@ export default function DashboardPage() {
                   <p className="text-[10px] text-text-muted mt-0.5 line-clamp-1">
                     {bookMatch.author}
                   </p>
-                  <div className="mt-2 w-full h-[3px] bg-bg-glass-strong rounded-full">
+                  <div className="mt-2 w-full h-[3px] bg-bg-card-hover rounded-full">
                     <div
-                      className="bg-accent-lime h-full rounded-full transition-all duration-500"
+                      className="bg-bg-navy h-full rounded-full transition-all duration-500"
                       style={{ width: `${progress}%` }}
                     />
                   </div>
