@@ -98,14 +98,15 @@ export async function getUserChapter(userId: string, bookId: string, chapterId: 
 export async function markChapterRead(
   userId: string, bookId: string, chapterId: string, chapterNumber: number, totalChapters: number, aiScore?: number
 ): Promise<void> {
-  // Mark the chapter
+  // Mark the chapter — always 'read' so it enters the review queue.
+  // Only the Review page graduates a chapter to 'reviewed'.
   const hasScore = aiScore !== undefined;
   const scorePct = hasScore ? aiScore : null;
   
   await setDoc(doc(db, 'users', userId, 'userBooks', bookId, 'userChapters', chapterId), {
     bookId,
     chapterNumber,
-    status: hasScore ? 'reviewed' : 'read',
+    status: 'read',
     retentionScore: scorePct,
     readAt: new Date().toISOString(),
   });

@@ -11,7 +11,7 @@ export default function ReviewPage() {
 
   // Find all chapters that need review (read but not reviewed, or low retention)
   const chaptersToReview = userChapters
-    .filter((c) => c.status === "read" || (c.retentionScore && c.retentionScore < 70))
+    .filter((c) => c.status === "read")
     .map((c) => {
       const book = books.find((b) => b.id === c.bookId);
       const chapter = getBookChapters(c.bookId).find((ch) => ch.id === c.chapterId);
