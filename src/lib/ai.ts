@@ -135,16 +135,27 @@ Format:
 {"score":<10-100>,"summary":"<one short sentence>","gotRight":["<short point>"],"missed":["<short point>"],"misunderstood":["<short point>"],"conceptExplanation":"<1-2 short sentences>"}
 
 Scoring rubric — grade UP from zero based on demonstrated understanding:
-- 10-30: Answer is gibberish, completely off-topic, or a single word/phrase with no real content
+- 10-30: Gibberish, completely off-topic, or a single word/phrase with no real content
 - 30-55: Vague or barely related — doesn't meaningfully address the question
 - 55-75: Partially correct — captures some ideas but misses the core point of the question
-- 75-90: Correctly answers the main question, even if brief or imperfect
+- 75-89: Correctly answers the main question, even if brief or imperfect
 - 90-100: Thorough, accurate, and demonstrates clear understanding
+
+When to award 90+:
+- Answer is not only correct but also shows depth or nuance
+- Includes accurate examples or connections that go beyond the basic answer
+- Demonstrates clear comprehension of the key concepts
+- A well-articulated, accurate response
+
+When to award 75-89:
+- Correctly answers the question but is brief or could be more detailed
+- Minor wording differences are OK — this is still correct
+- A solid, accurate answer that directly addresses what was asked
 
 Important leniency rules:
 - Do NOT penalize for minor omissions, different wording, or skipping secondary details
 - Only penalize for being factually wrong or failing to address the question at all
-- A brief but correct answer is worth 75-85
+- A brief but correct answer is worth 75-89, NOT automatically 85
 - missed: ONLY list the single most important missing concept (empty array if student answered the question)
 - misunderstood: ONLY if student stated something factually incorrect (empty array otherwise)
 - gotRight: 1-3 things the student did well (empty array only if answer was completely off-topic)
