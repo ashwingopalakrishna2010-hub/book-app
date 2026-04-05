@@ -64,42 +64,6 @@ function StreakWidget({ streak }: { streak: number }) {
   );
 }
 
-function QuoteWidget() {
-  return (
-    <section className="mb-10">
-      <div className="flex justify-between items-center mb-5">
-        <h2 className="font-headline text-xl text-text-primary">Daily Insight</h2>
-      </div>
-      <div className="bg-white rounded-2xl p-6 relative overflow-hidden shadow-atmospheric">
-        <div className="absolute top-0 left-0 w-1 h-full bg-accent-purple rounded-full" />
-        <span
-          className="material-symbols-outlined absolute -top-2 -right-2 text-accent-purple/8 text-8xl"
-          style={{ fontVariationSettings: "'FILL' 1" }}
-        >
-          format_quote
-        </span>
-        <p className="font-headline italic text-lg text-text-primary leading-relaxed relative z-10 mb-5 pl-4">
-          "The soul becomes dyed with the color of its thoughts."
-        </p>
-        <div className="flex items-center gap-3 relative z-10 pl-4">
-          <div className="w-10 h-10 rounded-full bg-accent-purple/15 overflow-hidden border border-accent-purple/20">
-            <img
-              className="w-full h-full object-cover"
-              alt="Marcus Aurelius"
-              src="/images/books/download.jpg"
-            />
-          </div>
-          <div>
-            <p className="text-sm font-bold text-text-primary">Marcus Aurelius</p>
-            <p className="text-[10px] text-accent-purple font-semibold uppercase tracking-[0.15em]">
-              From Meditations
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 export default function DashboardPage() {
   const { books, userBooks, streak, getBookProgress } = useApp();
@@ -259,8 +223,6 @@ export default function DashboardPage() {
         </section>
       )}
 
-      {/* 4. Daily Insight */}
-      <QuoteWidget />
     </div>
   );
 }
