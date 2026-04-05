@@ -116,21 +116,38 @@ export async function analyzeResponse(
   question: string,
   userAnswer: string
 ): Promise<GradeResult> {
-  const systemPrompt = `You are an encouraging reading comprehension evaluator. Grade the student's answer and return ONLY a JSON object. Keep ALL strings short (under 15 words each).
+  // Guard: reject trivially short answers without calling the API
+  const words = userAnswer.trim().split(/\s+/).filter(Boolean);
+  if (userAnswer.trim().length < 15 || words.length < 3) {
+    return {
+      score: 15,
+      summary: 'Answer too brief to evaluate.',
+      gotRight: [],
+      missed: ['A substantive answer is required to receive credit'],
+      misunderstood: [],
+      conceptExplanation: '',
+    };
+  }
+
+  const systemPrompt = `You are a fair reading comprehension evaluator. Grade the student's answer and return ONLY a JSON object. Keep ALL strings short (under 15 words each).
 
 Format:
-{"score":<40-100>,"summary":"<one short sentence>","gotRight":["<short point>"],"missed":["<short point>"],"misunderstood":["<short point>"],"conceptExplanation":"<1-2 short sentences>"}
+{"score":<10-100>,"summary":"<one short sentence>","gotRight":["<short point>"],"missed":["<short point>"],"misunderstood":["<short point>"],"conceptExplanation":"<1-2 short sentences>"}
 
-Scoring philosophy — BE GENEROUS:
-- Start at 85. Only deduct for missing the CORE idea or stating something factually wrong.
-- Do NOT deduct for minor omissions, different wording, or skipping secondary details.
-- If the student directly answers the question asked, score 80-100.
-- score 85-100: answered the main idea correctly, even if briefly
-- score 65-84: got the gist but missed one key point
-- score 40-64: answer is vague or partially wrong on the core concept
+Scoring rubric — grade UP from zero based on demonstrated understanding:
+- 10-30: Answer is gibberish, completely off-topic, or a single word/phrase with no real content
+- 30-55: Vague or barely related — doesn't meaningfully address the question
+- 55-75: Partially correct — captures some ideas but misses the core point of the question
+- 75-90: Correctly answers the main question, even if brief or imperfect
+- 90-100: Thorough, accurate, and demonstrates clear understanding
+
+Important leniency rules:
+- Do NOT penalize for minor omissions, different wording, or skipping secondary details
+- Only penalize for being factually wrong or failing to address the question at all
+- A brief but correct answer is worth 75-85
 - missed: ONLY list the single most important missing concept (empty array if student answered the question)
 - misunderstood: ONLY if student stated something factually incorrect (empty array otherwise)
-- gotRight: 1-3 things the student did well
+- gotRight: 1-3 things the student did well (empty array only if answer was completely off-topic)
 - conceptExplanation: a brief helpful note expanding on the core idea
 - Output ONLY valid JSON. No markdown, no code fences, no extra text.`;
 
