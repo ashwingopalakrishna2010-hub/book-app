@@ -61,7 +61,7 @@ export default function ShelfPage() {
               <div className="flex gap-4">
                 <div className="w-20 h-28 flex-shrink-0 rounded-xl overflow-hidden shadow-[0_4px_16px_rgba(3,22,50,0.12)] group-hover:shadow-[0_8px_24px_rgba(3,22,50,0.15)] transition-all">
                   {book.coverUrl ? (
-                    <img className="w-full h-full object-cover" alt={book.title} src={book.coverUrl} />
+                    <img className="w-full h-full object-contain bg-bg-base" alt={book.title} src={book.coverUrl} />
                   ) : (
                     <div className="w-full h-full bg-bg-base flex items-center justify-center">
                       <span className="material-symbols-outlined text-text-muted">menu_book</span>

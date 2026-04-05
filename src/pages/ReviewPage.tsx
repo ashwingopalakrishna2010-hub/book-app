@@ -140,94 +140,10 @@ export default function ReviewPage() {
   };
 
   return (
-    <div className="animate-fade-in-up pb-10">
-      {/* Header */}
-      <div className="mb-6">
-        <h1 className="font-headline text-3xl font-bold text-text-primary mb-1">Review</h1>
-        <p className="text-text-secondary text-sm">AI-powered spaced repetition to solidify your knowledge.</p>
-      </div>
-
-      {!activeSession ? (
-        <>
-          <div className="bg-white rounded-2xl p-6 mb-8 relative overflow-hidden shadow-atmospheric">
-             <div className="absolute top-0 right-0 w-32 h-32 bg-accent-purple/5 rounded-full blur-[40px] pointer-events-none" />
-            <div className="relative z-10 flex flex-col md:flex-row gap-6 items-center">
-              <div className="w-20 h-20 rounded-full bg-bg-navy/[0.06] flex items-center justify-center flex-shrink-0">
-                <span className="font-headline font-bold text-3xl text-bg-navy">
-                  {chaptersToReview.length}
-                </span>
-              </div>
-              <div className="flex-1 text-center md:text-left">
-                <h2 className="font-headline text-xl text-text-primary mb-1">Pending Reviews</h2>
-                <p className="text-sm text-text-secondary mb-4">
-                  These chapters are ready for AI-powered review to improve your long-term retention.
-                </p>
-                <button
-                  className={`px-8 py-3 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 w-full md:w-auto hover:scale-[1.02] active:scale-[0.98] ${
-                    chaptersToReview.length > 0
-                       ? "btn-silk"
-                      : "bg-bg-base text-text-muted cursor-not-allowed"
-                  }`}
-                  disabled={chaptersToReview.length === 0}
-                  onClick={() => { setActiveSession(true); loadQuestion(0); }}
-                >
-                  <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
-                  Start Review Session
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="font-headline text-lg text-text-primary mb-4">Review Queue</h3>
-            <div className="flex flex-col gap-3">
-              {chaptersToReview.length > 0 ? (
-                chaptersToReview.map((item, idx) => (
-                  <div
-                    key={`${item.book.id}-${item.chapter.id}-${idx}`}
-                    className="bg-white rounded-xl p-4 flex gap-4 items-center group cursor-pointer hover:bg-bg-card-hover transition-all shadow-atmospheric"
-                    onClick={() => navigate(`/book/${item.book.id}`)}
-                  >
-                     <div className="w-12 h-16 flex-shrink-0 rounded-lg overflow-hidden shadow-[0_2px_8px_rgba(3,22,50,0.1)]">
-                        {item.book.coverUrl ? (
-                           <img src={item.book.coverUrl} className="w-full h-full object-cover" alt="" />
-                        ) : (
-                          <div className="w-full h-full bg-bg-base flex items-center justify-center">
-                            <span className="material-symbols-outlined text-text-muted text-xs">book</span>
-                          </div>
-                        )}
-                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[10px] uppercase font-bold tracking-[0.1em] text-text-muted mb-0.5 truncate">
-                        {item.book.title}
-                      </p>
-                      <h4 className="font-headline text-base text-text-primary truncate group-hover:text-bg-navy transition-colors">
-                        Ch {item.chapter.number}: {item.chapter.title}
-                      </h4>
-                    </div>
-                    <div className="flex-shrink-0 text-right">
-                      {item.userChapter.retentionScore !== undefined && (
-                        <span className={`text-sm font-bold block ${getScoreColor(item.userChapter.retentionScore)}`}>
-                          {item.userChapter.retentionScore}%
-                        </span>
-                      )}
-                      <span className="text-[10px] text-text-secondary mt-1 block">Due</span>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="text-center py-12 bg-white rounded-2xl shadow-atmospheric">
-                  <span className="material-symbols-outlined text-4xl text-success mb-2" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
-                  <p className="text-text-primary font-bold">All caught up!</p>
-                  <p className="text-sm text-text-secondary mt-1">Check back later or read a new chapter.</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </>
-      ) : (
-        /* Active Session View */
-        <div className="fixed inset-0 z-[100] bg-bg-base flex flex-col p-5 md:p-10">
+    <>
+      {/* Active Session — rendered OUTSIDE animated wrapper so CSS transform doesn't break fixed positioning */}
+      {activeSession && (
+        <div className="fixed inset-0 z-[200] bg-bg-base flex flex-col p-5 md:p-10">
           {/* Progress Bar */}
           <div className="max-w-2xl mx-auto w-full mb-8 mt-4">
             <div className="flex justify-between items-center mb-2">
@@ -468,6 +384,91 @@ export default function ReviewPage() {
           </div>
         </div>
       )}
-    </div>
+
+      {/* Normal Review Page — inside animated wrapper */}
+      <div className="animate-fade-in-up pb-10">
+        {/* Header */}
+        <div className="mb-6">
+          <h1 className="font-headline text-3xl font-bold text-text-primary mb-1">Review</h1>
+          <p className="text-text-secondary text-sm">AI-powered spaced repetition to solidify your knowledge.</p>
+        </div>
+
+        <div className="bg-white rounded-2xl p-6 mb-8 relative overflow-hidden shadow-atmospheric">
+           <div className="absolute top-0 right-0 w-32 h-32 bg-accent-purple/5 rounded-full blur-[40px] pointer-events-none" />
+          <div className="relative z-10 flex flex-col md:flex-row gap-6 items-center">
+            <div className="w-20 h-20 rounded-full bg-bg-navy/[0.06] flex items-center justify-center flex-shrink-0">
+              <span className="font-headline font-bold text-3xl text-bg-navy">
+                {chaptersToReview.length}
+              </span>
+            </div>
+            <div className="flex-1 text-center md:text-left">
+              <h2 className="font-headline text-xl text-text-primary mb-1">Pending Reviews</h2>
+              <p className="text-sm text-text-secondary mb-4">
+                These chapters are ready for AI-powered review to improve your long-term retention.
+              </p>
+              <button
+                className={`px-8 py-3 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 w-full md:w-auto hover:scale-[1.02] active:scale-[0.98] ${
+                  chaptersToReview.length > 0
+                     ? "btn-silk"
+                    : "bg-bg-base text-text-muted cursor-not-allowed"
+                }`}
+                disabled={chaptersToReview.length === 0}
+                onClick={() => { setActiveSession(true); loadQuestion(0); }}
+              >
+                <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
+                Start Review Session
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 className="font-headline text-lg text-text-primary mb-4">Review Queue</h3>
+          <div className="flex flex-col gap-3">
+            {chaptersToReview.length > 0 ? (
+              chaptersToReview.map((item, idx) => (
+                <div
+                  key={`${item.book.id}-${item.chapter.id}-${idx}`}
+                  className="bg-white rounded-xl p-4 flex gap-4 items-center group cursor-pointer hover:bg-bg-card-hover transition-all shadow-atmospheric"
+                  onClick={() => navigate(`/book/${item.book.id}`)}
+                >
+                   <div className="w-12 h-16 flex-shrink-0 rounded-lg overflow-hidden shadow-[0_2px_8px_rgba(3,22,50,0.1)]">
+                      {item.book.coverUrl ? (
+                         <img src={item.book.coverUrl} className="w-full h-full object-contain bg-bg-base" alt="" />
+                      ) : (
+                        <div className="w-full h-full bg-bg-base flex items-center justify-center">
+                          <span className="material-symbols-outlined text-text-muted text-xs">book</span>
+                        </div>
+                      )}
+                   </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] uppercase font-bold tracking-[0.1em] text-text-muted mb-0.5 truncate">
+                      {item.book.title}
+                    </p>
+                    <h4 className="font-headline text-base text-text-primary truncate group-hover:text-bg-navy transition-colors">
+                      Ch {item.chapter.number}: {item.chapter.title}
+                    </h4>
+                  </div>
+                  <div className="flex-shrink-0 text-right">
+                    {item.userChapter.retentionScore !== undefined && (
+                      <span className={`text-sm font-bold block ${getScoreColor(item.userChapter.retentionScore)}`}>
+                        {item.userChapter.retentionScore}%
+                      </span>
+                    )}
+                    <span className="text-[10px] text-text-secondary mt-1 block">Due</span>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-center py-12 bg-white rounded-2xl shadow-atmospheric">
+                <span className="material-symbols-outlined text-4xl text-success mb-2" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+                <p className="text-text-primary font-bold">All caught up!</p>
+                <p className="text-sm text-text-secondary mt-1">Check back later or read a new chapter.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

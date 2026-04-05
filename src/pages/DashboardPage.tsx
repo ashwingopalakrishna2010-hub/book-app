@@ -86,7 +86,7 @@ function QuoteWidget() {
             <img
               className="w-full h-full object-cover"
               alt="Marcus Aurelius"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Marcus_Aurelius_Louvre_MR561_n1.jpg/800px-Marcus_Aurelius_Louvre_MR561_n1.jpg"
+              src="/images/books/download.jpg"
             />
           </div>
           <div>
@@ -138,7 +138,7 @@ export default function DashboardPage() {
               <div className="w-24 h-36 flex-shrink-0 rounded-xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.3)] border border-white/10 group-hover:scale-105 transition-transform duration-500">
                 {currentBookData.coverUrl ? (
                   <img
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain bg-bg-base/30"
                     alt={currentBookData.title}
                     src={currentBookData.coverUrl}
                   />
@@ -230,7 +230,7 @@ export default function DashboardPage() {
                   <div className="w-28 h-40 rounded-xl overflow-hidden mb-3 shadow-[0_4px_16px_rgba(3,22,50,0.1)] group-hover:shadow-[0_8px_24px_rgba(3,22,50,0.15)] transition-all duration-300 group-hover:-translate-y-1">
                     {bookMatch.coverUrl ? (
                       <img
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain bg-bg-base"
                         alt={bookMatch.title}
                         src={bookMatch.coverUrl}
                       />

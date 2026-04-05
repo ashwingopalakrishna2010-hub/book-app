@@ -77,7 +77,7 @@ export default function BookDetailPage() {
           {/* Cover */}
           <div className="w-36 md:w-48 flex-shrink-0 rounded-xl overflow-hidden shadow-[0_12px_48px_rgba(0,0,0,0.4)] border border-white/10 transform hover:scale-105 transition-transform duration-500">
             {book.coverUrl ? (
-              <img src={book.coverUrl} alt={book.title} className="w-full h-full object-cover" />
+              <img src={book.coverUrl} alt={book.title} className="w-full h-full object-contain bg-bg-base/20" />
             ) : (
               <div className="w-full h-full aspect-[2/3] bg-bg-glass flex items-center justify-center">
                 <span className="material-symbols-outlined text-text-muted text-3xl">menu_book</span>

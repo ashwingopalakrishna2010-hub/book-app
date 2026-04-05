@@ -117,12 +117,12 @@ export const BOOKS: Book[] = [
   },
   {
     id: "man-search-meaning",
-    title: "Man's Search for Meaning",
-    author: "Viktor E. Frankl",
-    coverUrl: "/images/books/cover_mans_search_for_meaning_1774707490593.png",
+    title: "Meditations",
+    author: "Marcus Aurelius",
+    coverUrl: "/images/books/cover_meditations.png",
     description:
-      "A psychiatrist who survived the Nazi death camps describes his psychotherapeutic method of finding purpose in all forms of existence.",
-    totalChapters: 6,
+      "Personal writings of the Roman Emperor Marcus Aurelius, offering timeless Stoic wisdom on self-discipline, duty, and finding tranquility in the face of life's challenges.",
+    totalChapters: 12,
     genre: "Philosophy",
   },
   {
@@ -639,6 +639,20 @@ export const CHAPTERS: Chapter[] = [
   // Crime and Punishment — Epilogue (2 chapters)
   { id: "cp-40", bookId: "crime-punishment", number: 40, title: "Epilogue, Ch. 1 — Siberia", keyConcepts: ["Siberian exile", "Sonya follows", "Prison life", "Unrepentant pride"] },
   { id: "cp-41", bookId: "crime-punishment", number: 41, title: "Epilogue, Ch. 2 — Resurrection", keyConcepts: ["The plague dream", "Spiritual awakening", "Love as salvation", "Resurrection through suffering"] },
+
+  // Meditations — Book 1 (12 chapters)
+  { id: "med-1", bookId: "meditations", number: 1, title: "Book 1 — From My Grandfather Verus", keyConcepts: ["Stoic virtues", "Moral character", "Self-improvement", "Family influence"] },
+  { id: "med-2", bookId: "meditations", number: 2, title: "Book 2 — On the River Gran", keyConcepts: ["Impermanence", "Universal reason", "Present moment", "Inner tranquility"] },
+  { id: "med-3", bookId: "meditations", number: 3, title: "Book 3 — In Carnuntum", keyConcepts: ["Duty to Rome", "Moral clarity", "Rational action", "Universal nature"] },
+  { id: "med-4", bookId: "meditations", number: 4, title: "Book 4 — When Evil Thoughts Arise", keyConcepts: ["Overcoming negativity", "Rational response", "Inner peace", "Mental discipline"] },
+  { id: "med-5", bookId: "meditations", number: 5, title: "Book 5 — How to Behave", keyConcepts: ["Social conduct", "Authenticity", "Purposeful action", "Self-awareness"] },
+  { id: "med-6", bookId: "meditations", number: 6, title: "Book 6 — On Human Nature", keyConcepts: ["Accepting others", "Universal connection", "Compassion", "Rational understanding"] },
+  { id: "med-7", bookId: "meditations", number: 7, title: "Book 7 — What Is Evil", keyConcepts: ["Nature of evil", "Perception vs reality", "Inner judgment", "Moral clarity"] },
+  { id: "med-8", bookId: "meditations", number: 8, title: "Book 8 — Personal Reflection", keyConcepts: ["Self-examination", "Continuous improvement", "Wisdom", "Inner guidance"] },
+  { id: "med-9", bookId: "meditations", number: 9, title: "Book 9 — Universal Reason", keyConcepts: ["Cosmic order", "Rational universe", "Divine intelligence", "Human purpose"] },
+  { id: "med-10", bookId: "meditations", number: 10, title: "Book 10 — On Solitude", keyConcepts: ["Inner solitude", "Self-reliance", "Peaceful mind", "Philosophical refuge"] },
+  { id: "med-11", bookId: "meditations", number: 11, title: "Book 11 — The Rational Animal", keyConcepts: ["Human nature", "Rational capacity", "Moral responsibility", "Social duty"] },
+  { id: "med-12", bookId: "meditations", number: 12, title: "Book 12 — Accepting Fate", keyConcepts: ["Amor fati", "Accepting destiny", "Inner freedom", "Peaceful resignation"] },
 ];
 
 // ============================================
@@ -975,4 +989,5 @@ export const BOOK_COLORS: Record<string, { bg: string; accent: string }> = {
   "man-search-meaning": { bg: "#2c2c34", accent: "#c9b1ff" },
   "psychology-money": { bg: "#1a3a2a", accent: "#f0c040" },
   "crime-punishment": { bg: "#2a0a0a", accent: "#c62828" },
+  meditations: { bg: "#1a2a1a", accent: "#d4af37" },
 };
